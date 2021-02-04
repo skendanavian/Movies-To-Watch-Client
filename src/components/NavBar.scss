@@ -1,0 +1,13 @@
+.nav {
+  justify-content: space-between;
+  width: 100vw;
+}
+
+.nav ul li {
+  padding: 1rem;
+  list-style-type: none;
+
+  a {
+    color: white;
+  }
+}
