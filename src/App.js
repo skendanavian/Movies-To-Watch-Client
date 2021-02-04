@@ -12,9 +12,6 @@ function App() {
     <Router>
       <CssBaseline />
       <Switch>
-        <Route path="/">
-          <LandingPage />
-        </Route>
         <Route path="/movies">
           <NavBar />
         </Route>
@@ -23,6 +20,9 @@ function App() {
         </Route>
         <Route path="/register">
           <Register />
+        </Route>
+        <Route path="/">
+          <LandingPage />
         </Route>
       </Switch>
     </Router>

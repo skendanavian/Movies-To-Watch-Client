@@ -12,23 +12,18 @@ const NavBar = () => {
         <Toolbar>
           <Typography variant="title" color="inherit">
             <Box className="nav" display="flex">
-              Movie Tracker
+              The Watch List
               <ul>
                 <Box display="flex">
                   <li>
+                    <Link to="/users">My Movies</Link>
+                  </li>
+                  <li>
                     <Link to="/">Home</Link>
                   </li>
-                  <li>
-                    <Link to="/login">Login</Link>
-                  </li>
+
                   <li>
                     <Link to="/logout">Logout</Link>
-                  </li>
-                  <li>
-                    <Link to="/users">Sign Up</Link>
-                  </li>
-                  <li>
-                    <Link to="/users">My Movies</Link>
                   </li>
                 </Box>
               </ul>
