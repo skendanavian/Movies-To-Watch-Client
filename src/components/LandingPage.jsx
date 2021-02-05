@@ -15,6 +15,9 @@ import "./LandingPage.scss";
 const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 3, 2),
+    background: "rgb(193, 8, 8)",
+    color: "white",
+    "&:hover": { background: "red" },
   },
 }));
 
@@ -26,28 +29,29 @@ export default function LandingPage() {
       <CssBaseline />
       <div className="flex-column">
         <h1 className="shadow-red">The Watch List</h1>
-        <h2>Never Waste Another Minute When Choosing A Movie!</h2>
-
         <div className="flex-row">
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign Up
-          </Button>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Login
-          </Button>
+          <Link href="/register">
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              className={classes.submit}
+            >
+              Sign Up
+            </Button>
+          </Link>
+          <Link href="/login">
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              className={classes.submit}
+            >
+              Login
+            </Button>
+          </Link>
         </div>
+        <h2>Never Waste Another Minute When Choosing A Movie!</h2>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ const NavBar = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="title" color="inherit">
-            <Box className="nav" display="flex">
+            <Box className="nav">
               The Watch List
               <ul>
                 <Box display="flex">
