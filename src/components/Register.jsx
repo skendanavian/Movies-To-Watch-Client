@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,6 +13,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import axios from "axios";
 import "./Login-Register.scss";
 
 function Copyright() {
@@ -56,8 +58,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function Register() {
   const classes = useStyles();
+  const [registrationForm, setRegistrationForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const submitRegistration = (e) => {
+    e.preventDefault();
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/register`,
+        JSON.parse(registrationForm)
+      )
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const handleInput = (e) => {
+    setRegistrationForm({
+      ...registrationForm,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -69,7 +97,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={submitRegistration} className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -80,6 +108,7 @@ export default function SignIn() {
             name="username"
             autoComplete="username"
             autoFocus
+            onChange={handleInput}
           />
           <TextField
             variant="outlined"
@@ -91,6 +120,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={handleInput}
           />
           <TextField
             variant="outlined"
@@ -102,6 +132,7 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleInput}
           />
 
           <Button

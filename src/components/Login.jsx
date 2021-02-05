@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -59,6 +60,32 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   const classes = useStyles();
 
+  const [registrationForm, setRegistrationForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const submitRegistration = (e) => {
+    e.preventDefault();
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/register`,
+        JSON.parse(registrationForm)
+      )
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const handleInput = (e) => {
+    setRegistrationForm({
+      ...registrationForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -69,7 +96,7 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={submitRegistration} className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -80,6 +107,7 @@ export default function Login() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={handleInput}
           />
           <TextField
             variant="outlined"
@@ -91,6 +119,7 @@ export default function Login() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleInput}
           />
           <Button
             type="submit"
