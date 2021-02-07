@@ -48,16 +48,35 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [loginStatus, setLoginStatus] = useState(false);
+
+  const userAuthenticated = () => {
+    axios
+      .get("http://localhost:8080/api/isUserAuth", {
+        headers: { "x-access-token": localStorage.getItem("token") },
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
 
   const submitLogin = (e) => {
     e.preventDefault();
 
-    //prettier-ignore
-    axios.post("api/login", loginForm).then((res) => {
-        console.log(res);
-        console.log(res.data);
+    axios
+      .post("http://localhost:8080/api/login", loginForm)
+      .then((res) => {
+        if (!res.data.auth) {
+          setLoginStatus(false);
+        } else {
+          console.log(res.data);
+          localStorage.setItem("token", "Bearer" + res.data.token);
+          setLoginStatus(true);
+        }
       })
       .catch((e) => console.log(e));
+
+    userAuthenticated();
   };
 
   const handleInput = (e) => {
