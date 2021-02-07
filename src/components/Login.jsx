@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
-
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -52,9 +51,9 @@ export default function Login() {
 
   const submitLogin = (e) => {
     e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/login`, JSON.parse(loginForm))
-      .then((res) => {
+
+    //prettier-ignore
+    axios.post("api/login", loginForm).then((res) => {
         console.log(res);
         console.log(res.data);
       })

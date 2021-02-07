@@ -53,10 +53,7 @@ export default function Register() {
   const submitRegistration = (e) => {
     e.preventDefault();
     axios
-      .post(
-        `${process.env.REACT_APP_API_URL}/register`,
-        JSON.parse(registrationForm)
-      )
+      .post("api/register", registrationForm)
       .then((res) => {
         console.log(res);
         console.log(res.data);
